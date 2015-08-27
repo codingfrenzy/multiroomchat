@@ -10,6 +10,9 @@ public interface ITicTacToeServer extends Remote {
     // time left should be implemented in the client side;
 //    public int timeLeft() throws RemoteException;
 
+//    public void setTest(int test) throws RemoteException;
+//    public int getTest() throws RemoteException;
+
     public int connectPlayer() throws RemoteException;
 
     public int playersConnected() throws RemoteException;

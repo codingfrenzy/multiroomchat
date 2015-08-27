@@ -83,8 +83,13 @@ public class TicTacToePlayer implements Runnable {
     public void run() {
         try {
             playerID = it.connectPlayer();
-            System.out.println("Player " + playerID + " connected.");
 
+            if(playerID > 2){
+                System.out.println("Invalid Player connected.");
+                return;
+            }
+
+            System.out.println("Player " + playerID + " connected.");
             while (it.playersConnected() < 2) {
                 System.out.println("Waiting for other player..");
                 Thread.sleep(5 * 1000);

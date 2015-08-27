@@ -12,7 +12,8 @@ import java.util.Scanner;
  */
 public class TicTacToeServer implements ITicTacToeServer {
 
-    static ITicTacToeServer t;
+    static TicTacToeServer t3;
+    static ITicTacToeServer stub;
 
     int playersConnected = 0;
 
@@ -33,10 +34,12 @@ public class TicTacToeServer implements ITicTacToeServer {
     public static void makeStub() {
         try {
             String name = "TicTacToeServer";
-            t = new TicTacToeServer();
+            t3 = new TicTacToeServer();
+//            t3.setTest(1);
 
 //            UnicastRemoteObject.unexportObject(t, true);
-            ITicTacToeServer stub = (ITicTacToeServer) UnicastRemoteObject.exportObject(t, 0);
+            stub = (ITicTacToeServer) UnicastRemoteObject.exportObject(t3, 0);
+//            stub.setTest(2);
 
             Registry registry = LocateRegistry.createRegistry(15213);
             registry.rebind(name, stub);
@@ -46,8 +49,18 @@ public class TicTacToeServer implements ITicTacToeServer {
         }
     }
 
+//    public int test = 0;
+//    public int getTest() {
+//        return test;
+//    }
+//
+//    public void setTest(int test) {
+//        this.test = test;
+//    }
+
     @Override
     public int connectPlayer() throws RemoteException {
+        System.out.println("Player Connected");
         playersConnected++;
         return playersConnected;
     }
@@ -122,5 +135,9 @@ public class TicTacToeServer implements ITicTacToeServer {
 
         System.setProperty("java.rmi.server.hostname", ip);
         makeStub();
+
+        Watcher w = new Watcher(t3);
+        Thread t = new Thread(w);
+        t.start();
     }
 }
