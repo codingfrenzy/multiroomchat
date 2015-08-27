@@ -110,14 +110,14 @@ public class TicTacToeServer implements ITicTacToeServer {
 
         String ip =
 //                "localhost";
-                "52.4.225.209";
+                "52.21.170.190";
 //                "50.248.80.131";
 
-        System.out.println("Enter IP (default: 52.4.225.209): ");
-        Scanner reader = new Scanner(System.in);
-        String input = reader.nextLine();
-        if (input.length() != 0) {
-            ip = input;
+//        System.out.println("Enter IP (default: 52.4.225.209): ");
+//        Scanner reader = new Scanner(System.in);
+//        String input = reader.nextLine();
+        if (args.length == 1) {
+            ip = args[0];
         }
 
         System.setProperty("java.rmi.server.hostname", ip);

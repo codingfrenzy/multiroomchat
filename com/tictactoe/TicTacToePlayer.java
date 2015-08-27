@@ -43,7 +43,10 @@ public class TicTacToePlayer implements Runnable {
 
     private void displayGame() throws RemoteException {
         game = it.gameStatus(playerID);
+        System.out.println("\0\t0\t1\t2");
         for (int i = 0; i < game.length; i++) {
+            System.out.print(i);
+            System.out.print('\t');
             for (int j = 0; j < game.length; j++) {
                 char x;
                 switch (game[i][j]) {
@@ -57,7 +60,7 @@ public class TicTacToePlayer implements Runnable {
                     default:
                         x = '-';
                 }
-                System.out.format("%3c", x);
+                System.out.format("%c\t", x);
             }
             System.out.print("\n");
         }
@@ -121,14 +124,13 @@ public class TicTacToePlayer implements Runnable {
     public static void main(String[] args) {
         String ip =
 //                "localhost";
-                "52.4.225.209";
+                "52.21.170.190";
 //                "50.248.80.131";
 
-        System.out.println("Enter IP (default: 52.4.225.209): ");
-        Scanner reader = new Scanner(System.in);
-        String input = reader.nextLine();
-        if (input.length() != 0) {
-            ip = input;
+//        Scanner reader = new Scanner(System.in);
+//        String input = reader.nextLine();
+        if (args.length == 1) {
+            ip = args[0];
         }
         connectToServer(ip);
         TicTacToePlayer tp = new TicTacToePlayer();
