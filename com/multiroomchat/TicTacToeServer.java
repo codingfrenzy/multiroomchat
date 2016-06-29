@@ -1,11 +1,9 @@
-package com.tictactoe;
+package com.multiroomchat;
 
 import java.rmi.*;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.rmi.server.ServerRef;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.Scanner;
 
 /**
  * Created by prasanthnair on 8/20/15.
@@ -136,7 +134,7 @@ public class TicTacToeServer implements ITicTacToeServer {
         System.setProperty("java.rmi.server.hostname", ip);
         makeStub();
 
-        Watcher w = new Watcher(t3);
+        ServerWatcher w = new ServerWatcher(t3);
         Thread t = new Thread(w);
         t.start();
     }

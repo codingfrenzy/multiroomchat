@@ -1,10 +1,9 @@
-package com.tictactoe;
+package com.multiroomchat;
 
 import java.net.MalformedURLException;
 import java.rmi.*;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -13,6 +12,8 @@ import java.util.Scanner;
 public class TicTacToePlayer implements Runnable {
 
     static ITicTacToeServer it;
+
+    static int PING = Config.PING;
 
     int playerID;
 
@@ -82,17 +83,17 @@ public class TicTacToePlayer implements Runnable {
     @Override
     public void run() {
         try {
-            playerID = it.connectPlayer();
-
-            if(playerID > 2){
-                System.out.println("Invalid Player connected.");
+            if (it.playersConnected() > 2) {
+                System.out.println("More than 2 players connected.");
                 return;
             }
 
+            playerID = it.connectPlayer();
+
             System.out.println("Player " + playerID + " connected.");
-            while (it.playersConnected() < 2) {
+            while (it.playersConnected() == 1) {
                 System.out.println("Waiting for other player..");
-                Thread.sleep(5 * 1000);
+                Thread.sleep(PING * 1000);
             }
 
             System.out.println("Game Started!");
@@ -106,7 +107,7 @@ public class TicTacToePlayer implements Runnable {
             while (it.checkWinner() == 0) {
                 System.out.println("Waiting for other player to make move.");
                 while (!it.readyToPlay(playerID)) {
-                    Thread.sleep(3 * 1000);
+                    Thread.sleep(PING * 1000);
                 }
                 if (it.checkWinner() != 0)
                     break;

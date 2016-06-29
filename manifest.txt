@@ -1,0 +1,2 @@
+Main-Class: com/tictactoe/TicTacToePlayer
+Class-Path: com/tictactoe/*

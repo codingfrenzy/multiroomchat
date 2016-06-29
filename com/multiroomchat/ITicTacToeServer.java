@@ -1,4 +1,4 @@
-package com.tictactoe;
+package com.multiroomchat;
 
 import java.rmi.*;
 
@@ -24,5 +24,7 @@ public interface ITicTacToeServer extends Remote {
     public boolean readyToPlay(int playerID) throws RemoteException;
 
     public int checkWinner() throws RemoteException;
+
+    public boolean ifServerReset() throws RemoteException;
 
 }
